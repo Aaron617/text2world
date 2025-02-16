@@ -1,5 +1,5 @@
 <h1 align="center">
-	🌍 Text2World: Benchmarking World Modeling Capabilities of Large Language Models via Program Synthesis<br>
+	🌍 Text2World: Benchmarking Large Language Models for Symbolic World Model Generation<br>
 </h1>
 
 # 📚 Overview
