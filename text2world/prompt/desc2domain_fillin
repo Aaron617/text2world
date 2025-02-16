@@ -1,0 +1,14 @@
+I will give you a draft for the domain pddl, and you need to fill in the missing '[Mask]' sections for each action with appropriate PDDL expressions to define their preconditions and effects based on the given pddl description. 
+The outputed PDDL MUST be enclosed in ```pddl```. 
+You are not allowed to change the name of the domain in the PDDL Draft.
+You MUST keep the 'requirements', 'types', 'predicates' fields in generated PDDL consistent with the PDDL draft.
+
+PDDL Description:
+[Description]
+Example Trajecotry:
+[Traj]
+PDDL Draft:
+```pddl
+[Draft]
+```
+Generated PDDL:

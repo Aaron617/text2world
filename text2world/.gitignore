@@ -1,0 +1,5 @@
+deprecated/
+data_annotation/
+**/cloudgpt*
+key.txt
+**/temp.pddl

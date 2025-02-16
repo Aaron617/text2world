@@ -1,0 +1,318 @@
+You are tasked with converting a given Planning Domain Definition Language (PDDL) domain description into its corresponding formal PDDL domain. The description will outline the essential components of the domains. Your output should be a well-structured PDDL domain that accurately represents the given description, adhering to the syntax and semantics of PDDL.
+Your output must strictly adhere to the format exemplified below. 
+Here are some examples:
+
+Example 0:
+## PDDL Domain Description
+### General
+The robot has four actions: pickup, putdown, stack, and unstack. The domain assumes a world where there are a set of blocks that can be stacked on top of each other, an arm that can hold one block at a time, and a table where blocks can be placed.
+### Predicates
+(clear ?x): Indicates that the top of block ?x is clear, with no other blocks on it.
+(on-table ?x): Indicates that block ?x is directly on the table.
+(arm-empty): Indicates that the robot's arm is empty, not holding any block.
+(holding ?x): Indicates that the robot's arm is currently holding block ?x.
+(on ?x ?y): Indicates that block ?x is directly on top of block ?y.
+### Action
+pickup <block>: allows the arm to pick up a block from the table if it is clear and the arm is empty. After the pickup action, the arm will be holding the block, and the block will no longer be on the table or clear.
+putdown <block>: allows the arm to put down a block on the table if it is holding a block. After the putdown action, the arm will be empty, and the block will be on the table and clear.
+stack <block> <block>: allows the arm to stack a block on top of another block if the arm is holding the top block and the bottom block is clear. After the stack action, the arm will be empty, the top block will be on top of the bottom block, and the bottom block will no longer be clear.
+unstack <block> <block>: allows the arm to unstack a block from on top of another block if the arm is empty and the top block is clear. After the unstack action, the arm will be holding the top block, the top block will no longer be on top of the bottom block, and the bottom block will be clear.
+
+## PDDL Domain
+```pddl
+(define (domain blocksworld-4ops)
+  (:requirements :strips)
+  (:predicates (clear ?x)
+              (on-table ?x)
+              (arm-empty)
+              (holding ?x)
+              (on ?x ?y))
+
+  (:action pickup
+    :parameters (?ob)
+    :precondition (and (clear ?ob) (on-table ?ob) (arm-empty))
+    :effect (and (holding ?ob) (not (clear ?ob)) (not (on-table ?ob)) 
+                (not (arm-empty))))
+
+  (:action putdown
+    :parameters  (?ob)
+    :precondition (holding ?ob)
+    :effect (and (clear ?ob) (arm-empty) (on-table ?ob) 
+                (not (holding ?ob))))
+
+  (:action stack
+    :parameters  (?ob ?underob)
+    :precondition (and (clear ?underob) (holding ?ob))
+    :effect (and (arm-empty) (clear ?ob) (on ?ob ?underob)
+                (not (clear ?underob)) (not (holding ?ob))))
+
+  (:action unstack
+    :parameters  (?ob ?underob)
+    :precondition (and (on ?ob ?underob) (clear ?ob) (arm-empty))
+    :effect (and (holding ?ob) (clear ?underob)
+                (not (on ?ob ?underob)) (not (clear ?ob)) (not (arm-empty)))))
+```
+
+
+Example 1:
+## PDDL Domain Description
+### General
+You are a robot barman that manipulates drink dispensers, shot glasses and a shaker. You have two hands. The goal is to find a plan that serves a desired set of drinks.
+### Types
+object: The base type for all objects in the domain.
+hand: Represents the robot's hands.
+level: Represents the levels of liquid in containers.
+beverage: Represents drinks, including both ingredients and cocktails.
+dispenser: Represents the dispensers for ingredients.
+container: Represents objects that can hold beverages.
+ingredient: A subtype of beverage, represents the basic components of cocktails.
+cocktail: A subtype of beverage, represents mixed drinks.
+shot: A subtype of container, represents shot glasses.
+shaker: A subtype of container, represents the cocktail shaker.
+### Predicates
+(ontable ?c): Indicates that container ?c is on the table.
+(holding ?h ?c): Indicates that hand ?h is holding container ?c.
+(handempty ?h): Indicates that hand ?h is empty.
+(empty ?c): Indicates that container ?c is empty.
+(contains ?c ?b): Indicates that container ?c contains beverage ?b.
+(clean ?c): Indicates that container ?c is clean.
+(used ?c ?b): Indicates that container ?c has been used for beverage ?b.
+(dispenses ?d ?i): Indicates that dispenser ?d dispenses ingredient ?i.
+(shaker-empty-level ?s ?l): Indicates the empty level ?l of shaker ?s.
+(shaker-level ?s ?l): Indicates the current level ?l of shaker ?s.
+(next ?l1 ?l2): Indicates that level ?l2 is next after level ?l1.
+(unshaked ?s): Indicates that shaker ?s is unshaked.
+(shaked ?s): Indicates that shaker ?s is shaked.
+(cocktail-part1 ?c ?i): Indicates that ingredient ?i is the first part of cocktail ?c.
+(cocktail-part2 ?c ?i): Indicates that ingredient ?i is the second part of cocktail ?c.
+### Actions
+grasp <?h> <?c>: Allows a hand to grasp a container from the table if the hand is empty. After the grasp action, the hand will be holding the container, and the container will no longer be on the table.
+leave <?h> <?c>: Allows a hand to leave a container on the table if it is holding the container. After the leave action, the hand will be empty, and the container will be on the table.
+fill-shot <?s> <?i> <?h1> <?h2> <?d>: Allows filling a shot glass with an ingredient from a dispenser if one hand is holding the shot glass, the other hand is empty, the shot glass is empty and clean, and the dispenser dispenses the ingredient. After the fill-shot action, the shot glass will contain the ingredient and will no longer be empty or clean.
+refill-shot <?s> <?i> <?h1> <?h2> <?d>: Similar to fill-shot, but for a shot glass that has been used for the same ingredient before.
+empty-shot <?h> <?p> <?b>: Allows emptying a shot glass if a hand is holding it and it contains a beverage. After the empty-shot action, the shot glass will be empty.
+clean-shot <?s> <?b> <?h1> <?h2>: Allows cleaning a shot glass if one hand is holding it, the other hand is empty, the shot glass is empty, and has been used for a beverage. After the clean-shot action, the shot glass will be clean.
+pour-shot-to-clean-shaker <?s> <?i> <?d> <?h1> <?l> <?l1>: Allows pouring from a shot glass to a clean shaker if a hand is holding the shot glass, the shot glass contains an ingredient, and the shaker is empty and clean. After this action, the shaker will contain the ingredient and its level will increase.
+pour-shot-to-used-shaker <?s> <?i> <?d> <?h1> <?l> <?l1>: Similar to pour-shot-to-clean-shaker, but for a used shaker that is unshaked.
+empty-shaker <?h> <?s> <?b> <?l> <?l1>: Allows emptying a shaker if a hand is holding it, it contains a shaked cocktail. After this action, the shaker will be empty and at its empty level.
+clean-shaker <?h1> <?h2> <?s>: Allows cleaning a shaker if one hand is holding it, the other hand is empty, and the shaker is empty. After this action, the shaker will be clean.
+shake <?b> <?d1> <?d2> <?s> <?h1> <?h2>: Allows shaking a cocktail in a shaker if one hand is holding the shaker, the other hand is empty, the shaker contains two ingredients that are parts of a cocktail, and the shaker is unshaked. After this action, the shaker will contain the shaked cocktail.
+pour-shaker-to-shot <?b> <?d> <?h> <?s> <?l> <?l1>: Allows pouring from a shaker to a shot glass if a hand is holding the shaker, the shaker contains a shaked cocktail, and the shot glass is empty and clean. After this action, the shot glass will contain the cocktail, and the shaker's level will decrease.
+
+## PDDL Domain:
+```pddl
+(define (domain barman)
+  (:requirements :strips :typing)
+  (:types hand level beverage dispenser container - object
+  	  ingredient cocktail - beverage
+          shot shaker - container)
+  (:predicates  (ontable ?c - container)
+                (holding ?h - hand ?c - container)
+		(handempty ?h - hand)
+		(empty ?c - container)
+                (contains ?c - container ?b - beverage)
+		(clean ?c - container)
+                (used ?c - container ?b - beverage)
+                (dispenses ?d - dispenser ?i - ingredient)
+		(shaker-empty-level ?s - shaker ?l - level)
+		(shaker-level ?s - shaker ?l - level)
+		(next ?l1 - level ?l2 - level)
+		(unshaked ?s - shaker)
+		(shaked ?s - shaker)
+                (cocktail-part1 ?c - cocktail ?i - ingredient)
+                (cocktail-part2 ?c - cocktail ?i - ingredient))
+		
+  (:action grasp
+             :parameters (?h - hand ?c - container)
+             :precondition (and (ontable ?c) (handempty ?h))
+             :effect (and (not (ontable ?c))
+	     	     	  (not (handempty ?h))
+			  (holding ?h ?c)))
+
+  (:action leave
+             :parameters (?h - hand ?c - container)
+             :precondition (holding ?h ?c)
+             :effect (and (not (holding ?h ?c))
+	     	     	  (handempty ?h)
+			  (ontable ?c)))
+  
+  (:action fill-shot
+           :parameters (?s - shot ?i - ingredient ?h1 - hand ?h2 - hand ?d - dispenser)
+           :precondition (and (holding ?h1 ?s)
+                              (handempty ?h2)
+	   		      (dispenses ?d ?i)
+                              (empty ?s)
+			      (clean ?s))
+           :effect (and (not (empty ?s))
+	   	   	(contains ?s ?i)
+	   	   	(not (clean ?s))
+			(used ?s ?i)))
+
+
+  (:action refill-shot
+           :parameters (?s - shot ?i - ingredient ?h1 - hand ?h2 - hand ?d - dispenser)
+           :precondition (and (holding ?h1 ?s)	   		      
+                              (handempty ?h2)
+	   		      (dispenses ?d ?i)
+                              (empty ?s)
+			      (used ?s ?i))
+           :effect (and (not (empty ?s))
+                        (contains ?s ?i)))
+
+  (:action empty-shot
+           :parameters (?h - hand ?p - shot ?b - beverage)
+           :precondition (and (holding ?h ?p)
+                              (contains ?p ?b))
+           :effect (and (not (contains ?p ?b))
+	   	   	(empty ?p)))
+
+  (:action clean-shot
+  	   :parameters (?s - shot ?b - beverage ?h1 - hand ?h2 - hand)
+           :precondition (and (holding ?h1 ?s)
+                              (handempty ?h2)	   		      
+			      (empty ?s)
+                              (used ?s ?b))
+           :effect (and (not (used ?s ?b))
+	   	   	(clean ?s)))
+
+  (:action pour-shot-to-clean-shaker
+           :parameters (?s - shot ?i - ingredient ?d - shaker ?h1 - hand ?l - level ?l1 - level)
+           :precondition (and (holding ?h1 ?s)
+			      (contains ?s ?i)
+                              (empty ?d)
+	   		      (clean ?d)                              
+                              (shaker-level ?d ?l)
+                              (next ?l ?l1))
+           :effect (and (not (contains ?s ?i))
+	   	   	(empty ?s)
+			(contains ?d ?i)
+                        (not (empty ?d))
+			(not (clean ?d))
+			(unshaked ?d)
+			(not (shaker-level ?d ?l))
+			(shaker-level ?d ?l1)))
+
+
+  (:action pour-shot-to-used-shaker
+           :parameters (?s - shot ?i - ingredient ?d - shaker ?h1 - hand ?l - level ?l1 - level)
+           :precondition (and (holding ?h1 ?s)
+			      (contains ?s ?i)
+                              (unshaked ?d)
+                              (shaker-level ?d ?l)
+                              (next ?l ?l1))
+           :effect (and (not (contains ?s ?i))
+                        (contains ?d ?i)
+	   	   	(empty ?s)     
+  			(not (shaker-level ?d ?l))
+			(shaker-level ?d ?l1)))
+
+  (:action empty-shaker
+           :parameters (?h - hand ?s - shaker ?b - cocktail ?l - level ?l1 - level)
+           :precondition (and (holding ?h ?s)
+                              (contains ?s ?b)
+			      (shaked ?s)
+			      (shaker-level ?s ?l)
+			      (shaker-empty-level ?s ?l1))
+           :effect (and (not (shaked ?s))
+	   	   	(not (shaker-level ?s ?l))
+	   	   	(shaker-level ?s ?l1)
+			(not (contains ?s ?b))
+	   	   	(empty ?s)))
+
+  (:action clean-shaker
+  	   :parameters (?h1 - hand ?h2 - hand ?s - shaker)
+           :precondition (and (holding ?h1 ?s)
+                              (handempty ?h2)
+                              (empty ?s))
+           :effect (and (clean ?s)))
+  
+  (:action shake
+  	   :parameters (?b - cocktail ?d1 - ingredient ?d2 - ingredient ?s - shaker ?h1 - hand ?h2 - hand)
+           :precondition (and (holding ?h1 ?s)
+                              (handempty ?h2)
+			      (contains ?s ?d1)
+                              (contains ?s ?d2)
+                              (cocktail-part1 ?b ?d1)
+			      (cocktail-part2 ?b ?d2)
+			      (unshaked ?s))			      
+           :effect (and (not (unshaked ?s))
+		        (not (contains ?s ?d1))
+                        (not (contains ?s ?d2))
+	   	   	(shaked ?s)
+                        (contains ?s ?b)))
+
+  (:action pour-shaker-to-shot
+           :parameters (?b - beverage ?d - shot ?h - hand ?s - shaker ?l - level?l1 - level)
+           :precondition (and (holding ?h ?s)
+			      (shaked ?s)
+			      (empty ?d)
+			      (clean ?d)
+			      (contains ?s ?b)
+                              (shaker-level ?s ?l)
+                              (next ?l1 ?l))
+           :effect (and (not (clean ?d))
+	   	   	(not (empty ?d))
+			(contains ?d ?b)
+			(shaker-level ?s ?l1)
+			(not (shaker-level ?s ?l))))
+ )
+```
+
+
+Example 2:
+## PDDL Domain Description
+### General
+You are a robot named Robby that can move between rooms and manipulate objects using your gripper. The goal is to find a plan that moves balls between different rooms as required.
+### Predicates
+(room ?r): Indicates that ?r is a room.
+(ball ?b): Indicates that ?b is a ball.
+(gripper ?g): Indicates that ?g is a gripper.
+(at-robby ?r): Indicates that Robby is in room ?r.
+(at ?b ?r): Indicates that ball ?b is in room ?r.
+(free ?g): Indicates that gripper ?g is free (not holding a ball).
+(carry ?o ?g): Indicates that gripper ?g is carrying object ?o.
+### Actions
+move <?from> <?to>: This action allows the robot to move from one room to another.The action has a single precondition, which is that the robot is currently in a room. The effect of this action is to move the robot to another room and to remove the fact that it is in the original room.
+pick <?obj> <?room> <?gripper>: This action allows the robot to pick up an object using the gripper. The action has three preconditions: (1) the object is located in a room (2) the robot is currently in the same room and (3) the gripper is free (i.e., not holding any object). The effect of this action is to update the state of the world to show that the robot is carrying the object using the gripper, the object is no longer in the room, and the gripper is no longer free.
+drop <?obj> <?room> <?gripper>: This action allows the robot to drop an object that it is carrying. The action has two preconditions: (1) the robot is currently carrying the object using the gripper, and (2) the robot is currently in a room. The effect of this action is to update the state of the world to show that the robot is no longer carrying the object using the gripper, the object is now located in the room, and the gripper is now free.
+
+## PDDL Domain
+```pddl
+(define (domain gripper-strips)
+   (:predicates (room ?r)
+        (ball ?b)
+        (gripper ?g)
+        (at-robby ?r)
+        (at ?b ?r)
+        (free ?g)
+        (carry ?o ?g))
+
+   (:action move
+       :parameters  (?from ?to)
+       :precondition (and  (room ?from) (room ?to) (at-robby ?from))
+       :effect (and  (at-robby ?to)
+             (not (at-robby ?from))))
+
+   (:action pick
+       :parameters (?obj ?room ?gripper)
+       :precondition  (and  (ball ?obj) (room ?room) (gripper ?gripper)
+                (at ?obj ?room) (at-robby ?room) (free ?gripper))
+       :effect (and (carry ?obj ?gripper)
+            (not (at ?obj ?room)) 
+            (not (free ?gripper))))
+
+   (:action drop
+       :parameters  (?obj  ?room ?gripper)
+       :precondition  (and  (ball ?obj) (room ?room) (gripper ?gripper)
+                (carry ?obj ?gripper) (at-robby ?room))
+       :effect (and (at ?obj ?room)
+            (free ?gripper)
+            (not (carry ?obj ?gripper)))))
+```
+
+
+You need to generate the corresponding domain pddl for the following description.
+    
+## PDDL Domain Description
+[Description]
+## PDDL Domain

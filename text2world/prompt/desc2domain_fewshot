@@ -1,0 +1,113 @@
+You are tasked with converting a given Planning Domain Definition Language (PDDL) domain description into its corresponding formal PDDL domain. The description will outline the essential components of the domains. Your output should be a well-structured PDDL domain that accurately represents the given description, adhering to the syntax and semantics of PDDL.
+Your output must strictly adhere to the format exemplified below. 
+Here are some examples:
+
+Example 0:
+## PDDL Domain Description
+### General
+You are a robot equipped with a gripper mechanism, designed to move and manipulate balls between different rooms. The domain focuses on the robot's ability to navigate rooms, pick up balls, and drop them in designated locations.
+### Types
+- **room**: Represents the different rooms within the environment.
+- **ball**: Represents the objects that the robot can pick up and move.
+- **gripper**: Represents the robot's mechanism for holding balls.
+### Predicates
+- **(at-robby ?r - room)**: Indicates that Robby, the robot, is currently in room ?r.
+- **(at ?b - ball ?r - room)**: Indicates that ball ?b is located in room ?r.
+- **(free ?g - gripper)**: Indicates that the gripper ?g is not currently holding any ball.
+- **(carry ?o - ball ?g - gripper)**: Indicates that the gripper ?g is carrying ball ?o.
+### Actions
+- **move <?from> <?to>**: Allows Robby to move from one room to another.  
+- **pick <?obj> <?room> <?gripper>**: Enables Robby to pick up a ball in a room using its gripper.  
+- **drop <?obj> <?room> <?gripper>**: Allows Robby to drop a ball it is carrying into a room.
+
+## PDDL Domain
+```pddl
+(define (domain gripper-strips)
+	(:types 
+		room - object
+		ball - object
+		gripper - object
+		)
+   (:predicates
+		(at-robby ?r - room)
+		(at ?b - ball ?r - room)
+		(free ?g - gripper)
+		(carry ?o - ball ?g - gripper))
+   (:action move
+       :parameters  (?from - room ?to - room)
+       :precondition (and (at-robby ?from))
+       :effect (and  (at-robby ?to)
+		     (not (at-robby ?from))))
+   (:action pick
+       :parameters (?obj - ball ?room - room ?gripper - gripper)
+       :precondition  (and 
+			    (at ?obj ?room) (at-robby ?room) (free ?gripper))
+       :effect (and (carry ?obj ?gripper)
+		    (not (at ?obj ?room)) 
+		    (not (free ?gripper))))
+   (:action drop
+       :parameters  (?obj - ball ?room - room ?gripper - gripper)
+       :precondition  (and 
+			    (carry ?obj ?gripper) (at-robby ?room))
+       :effect (and (at ?obj ?room)
+		    (free ?gripper)
+		    (not (carry ?obj ?gripper)))))
+```
+
+
+Example 1:
+## PDDL Domain Description
+### General
+This domain represents a simplified version of the classic "blocks world" problem, where a robot arm can stack and unstack blocks. The domain includes actions for picking up blocks from the table, putting down blocks onto the table, stacking blocks on top of each other, and unstacking them. The goal is to manipulate the blocks to achieve a specified configuration.
+### Predicates
+(clear ?x): Indicates that there is no block on top of block ?x, making it accessible for stacking or picking up.
+(on-table ?x): Indicates that block ?x is directly on the table.
+(arm-empty): Indicates that the robot's arm is not holding any block.
+(holding ?x): Indicates that the robot's arm is currently holding block ?x.
+(on ?x ?y): Indicates that block ?x is directly on top of block ?y.
+### Actions
+- **pickup <?ob>**: Picks up an object (?ob) from the table.  
+- **putdown <?ob>**: Puts down an object (?ob) onto the table.  
+- **stack <?ob> <?underob>**: Stacks an object (?ob) on top of another object (?underob), making the robot arm empty.  
+- **unstack <?ob> <?underob>**: Unstacks an object (?ob) from another object (?underob), making the robot arm no longer empty.
+
+## PDDL Domain:
+```pddl
+(define (domain blocksworld)
+  (:requirements :strips)
+(:predicates (clear ?x)
+             (on-table ?x)
+             (arm-empty)
+             (holding ?x)
+             (on ?x ?y))
+
+(:action pickup
+  :parameters (?ob)
+  :precondition (and (clear ?ob) (on-table ?ob) (arm-empty))
+  :effect (and (holding ?ob) (not (clear ?ob)) (not (on-table ?ob)) 
+               (not (arm-empty))))
+
+(:action putdown
+  :parameters  (?ob)
+  :precondition (holding ?ob)
+  :effect (and (clear ?ob) (arm-empty) (on-table ?ob) 
+               (not (holding ?ob))))
+
+(:action stack
+  :parameters  (?ob ?underob)
+  :precondition (and (clear ?underob) (holding ?ob))
+  :effect (and (arm-empty) (clear ?ob) (on ?ob ?underob)
+               (not (clear ?underob)) (not (holding ?ob))))
+
+(:action unstack
+  :parameters  (?ob ?underob)
+  :precondition (and (on ?ob ?underob) (clear ?ob) (arm-empty))
+  :effect (and (holding ?ob) (clear ?underob)
+               (not (on ?ob ?underob)) (not (clear ?ob)) (not (arm-empty)))))
+```
+
+You need to generate the corresponding domain pddl for the following description.
+    
+## PDDL Domain Description
+[Description]
+## PDDL Domain

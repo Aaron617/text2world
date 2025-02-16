@@ -1,0 +1,9 @@
+You are tasked with converting a given Planning Domain Definition Language (PDDL) domain description into its corresponding formal PDDL domain. The description will outline the essential components of the domains. 
+Your output should be a well-structured PDDL domain that accurately represents the given description, adhering to the syntax and semantics of PDDL.
+Your output pddl domain must be enclosed in ```pddl```.
+
+You need to generate the corresponding domain pddl for the following description.
+    
+PDDL Domain Description:
+[Description]
+PDDL Domain:
