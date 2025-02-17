@@ -2,8 +2,6 @@
 
 PROJECT_NAME=${1}
 
-llm_rating=0
-
 if [ "$PROJECT_NAME" = "_all_gen" ]; then
     echo "Cannot create project with name '_all_gen'. Exiting..."
     exit 1
@@ -21,7 +19,6 @@ for FILE in _generated_pddl/${PROJECT_NAME}/*.json; do
             --prompt_file_eval text2world/prompt/gpt4_evaluation \
             --save_path_gen "_generated_pddl/$PROJECT_NAME/$FILENAME.json" \
             --save_path_eval "_generated_pddl/_eval_result/$PROJECT_NAME/" \
-            --llm_rating "$llm_rating" \
             --gpu_num 0
 done
 

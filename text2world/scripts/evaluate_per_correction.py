@@ -12,7 +12,6 @@ import pdb
 from sentence_transformers import SentenceTransformer, util
 sys.path.append('utils/llm')
 sys.path.append('utils')
-from get_agent import get_llm
 
 ROOT_DIR = os.path.join(os.path.dirname(__file__), "../")
 sys.path.append(ROOT_DIR)
@@ -36,7 +35,6 @@ def parse():
     parser.add_argument("--gpu_num", required=False, default=0, help="specify the number of gpu cards", type=int)
     parser.add_argument("--save_path_gen", required=True, default=None, help="specify the name of llm agent", type=str)
     parser.add_argument("--save_path_eval", required=True, default=None, help="specify the name of llm agent", type=str)
-    parser.add_argument("--llm_rating", required=True, default=None, help="specify the name of llm agent", type=bool)
 
     parser.add_argument('--stop_tokens', type=str, default='\n\n',
                         help='Split stop tokens by ||')

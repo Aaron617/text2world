@@ -15,20 +15,7 @@ class Evaluator:
     def __init__(self, args):
         self.args = args
         self.sim_model = None
-        self.llm = None
         self.file_name = str(datetime.now()) + '_' + str(random.randint(1, 114514))
-
-    def _init_llm(self):
-        if self.llm is None:
-            from get_agent import get_llm
-            self.llm = get_llm(self.args)
-            print('llm is loaded')
-
-    def _init_llm(self):
-        if self.llm is None:
-            from get_agent import get_llm
-            self.llm = get_llm(self.args)
-            print('llm is loaded')
 
     def eval(self, gt_domain_text, pred_domain_text): # text
         executability = 0
@@ -81,18 +68,6 @@ class Evaluator:
     def cal_Levenshtein_ratio(self, text1, text2):
         ratio = Levenshtein.ratio(text1, text2)
         return ratio
-
-    def extract_rating(self, output):
-        pattern = r"Rating: \[\[(\d+)\]\]" or r"\*\*Rating\*\*: \[\[(\d+)\]\]" or r"Rating\n \[\[(\d+)\]\]" or r"Rating\n\[\[(\d+)\]\]"
-
-        match = re.search(pattern, output)
-        if match:
-            rating = int(match.group(1))
-            print(f"The rating value is: {rating}")
-            return rating
-        else:
-            print("No rating value found in the output.")
-            return None
 
     def compute_f1_score(self, prediction, reference):
         if len(prediction) == 0 and len(reference) == 0:
