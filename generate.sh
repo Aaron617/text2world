@@ -10,7 +10,7 @@ DESCRIPTION_TYPE="corrected_description"
 # DESCRIPTION_TYPE="domain_description"
 
 python text2world/scripts/generate.py \
-        --data_path pddl_benchmark/our_benchmark_sample_20_modified.json   \
+        --data_path pddl_benchmark/our_benchmark.json   \
         --prompt_style generate   \
         --prompt_file_gen text2world/prompt/$PROMPT_TYPE    \
         --max_correction $CORRECTION_TIME  \

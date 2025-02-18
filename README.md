@@ -2,8 +2,34 @@
 	🌍 Text2World: Benchmarking Large Language Models for Symbolic World Model Generation<br>
 </h1>
 
+<p align="center">
+  <a href="LICENSE">
+    <img alt="License" src="https://img.shields.io/github/license/Aaron617/text2world?color=blue">
+  </a>
+  <a href="https://github.com/Aaron617/text2world/pulls">
+    <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg">
+  </a>
+  <a href="https://github.com/Aaron617/text2world/commits">
+    <img alt="Last Commit" src="https://img.shields.io/github/last-commit/Aaron617/text2world">
+  </a>
+  <!-- <a href="https://github.com/Aaron617/text2world">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Aaron617/text2world?style=social">
+  </a> -->
+  <a href="https://hits.seeyoufarm.com">
+    <img alt="vies" src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FAaron617%2Ftext2world&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false">
+  </a>
+  <!-- <a href="https://arxiv.org/abs/YOUR_PAPER_ID">
+    <img alt="arXiv" src="https://img.shields.io/badge/arXiv-YOUR_PAPER_ID-b31b1b.svg">
+  </a> -->
+</p>
+
+
 # 📚 Overview
 ![](./assets/main.png)
+
+# 📝 Updates
+
+- 2025-02-18: Add [data viewer](https://huggingface.co/spaces/xdzouyd/text2world) for better visualization of Text2World.
 
 # 💻 Installation
 ```
@@ -33,15 +59,12 @@ claude-3.5-sonnet
 CodeLlama-34b-Instruct-hf
 deepseek-reasoner
 deepseek-v3
-msal-gpt-3.5
 gpt-3.5-turbo-0125
 gpt-3.5-turbo-1106
 gpt-4o
 gpt-4o-mini
 gpt-4-turbo
-Mixtral-8x22B-Instruct-v0.1
 Meta-Llama-3.1-70B-Instruct-Turbo
-Meta-Llama-3.1-405B-Instruct-Turbo
 o1-mini
 o1-preview
 o3-mini
@@ -75,3 +98,7 @@ Finally, run the following command to evaluate all models in the project. The ev
 ```
 bash evaluate.sh $PROJECT_NAME
 ```
+
+# 📝 Citation
+
+If you find this work useful, please consider citing the following paper:
