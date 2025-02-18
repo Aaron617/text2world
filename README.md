@@ -3,9 +3,9 @@
 </h1>
 
 <p align="center">
-  <a href="LICENSE">
+  <!-- <a href="LICENSE">
     <img alt="License" src="https://img.shields.io/github/license/Aaron617/text2world?color=blue">
-  </a>
+  </a> -->
   <a href="https://github.com/Aaron617/text2world/pulls">
     <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg">
   </a>
@@ -25,7 +25,7 @@
 
 
 # 📚 Overview
-![](./assets/main.png)
+![](./assets/main.svg)
 
 # 📝 Updates
 
@@ -55,19 +55,42 @@ OPENAI_API_KEY=...
 
 ## Available `$MODEL`
 ```
-claude-3.5-sonnet
-CodeLlama-34b-Instruct-hf
-deepseek-reasoner
-deepseek-v3
-gpt-3.5-turbo-0125
-gpt-3.5-turbo-1106
-gpt-4o
-gpt-4o-mini
-gpt-4-turbo
-Meta-Llama-3.1-70B-Instruct-Turbo
+# OpenAI O-series
 o1-mini
 o1-preview
 o3-mini
+
+# OpenAI GPT-4
+gpt-4o
+gpt-4o-mini
+gpt-4-turbo
+chatgpt-4o-latest
+
+# OpenAI GPT-3.5
+gpt-3.5-turbo-0125
+gpt-3.5-turbo-1106
+
+# Anthropic Claude
+claude-3.5-sonnet
+
+# Meta Llama-2
+llama2-7b
+llama2-13b
+llama2-70b
+
+# Meta LlaMA-3.1
+llama3.1-8b
+llama3.1-70b
+
+# DeepSeek
+deepseek-reasoner
+deepseek-v3
+
+# Meta CodeLlaMA
+codellama-7b
+codellama-13b
+codellama-34b
+codellama-70b
 ```
 
 ## Define your own `$MODEL`

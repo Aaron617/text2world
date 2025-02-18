@@ -78,117 +78,9 @@ llm:
     max_retry_iters: 100
     max_tokens: 8192
     use_parser: False
-  Mistral-8x22B-Instruct:
-    name: gpt
-    engine: mistralai/Mistral-8x22B-Instruct-v0.1
-    context_length: 8192
-    use_azure: False
-    temperature: 0.
-    top_p: 1
-    retry_delays: 20
-    max_retry_iters: 100
-    stop: 
-    max_tokens: 4096
-    use_parser: False
-  Meta-Llama-3.1-405B-Instruct:
-    name: gpt
-    engine: meta-llama/Meta-Llama-3.1-405B-Instruct
-    context_length: 128000
-    use_azure: False
-    temperature: 0.
-    top_p: 1
-    retry_delays: 20
-    max_retry_iters: 100
-    stop: 
-    max_tokens: 4000
-    use_parser: False
-  Meta-Llama-3.1-70B-Instruct-Turbo:
-    name: gpt
-    engine: Meta-Llama-3.1-70B-Instruct-Turbo
-    context_length: 8192
-    use_azure: False
-    temperature: 0.
-    top_p: 1
-    retry_delays: 20
-    max_retry_iters: 100
-    stop: 
-    max_tokens: 8000
-    use_parser: False
-  Mixtral-8x22B-Instruct-v0.1:
-    name: gpt
-    engine: Mixtral-8x22B-Instruct-v0.1
-    context_length: 8192
-    use_azure: False
-    temperature: 0.
-    top_p: 1
-    retry_delays: 20
-    max_retry_iters: 100
-    stop: 
-    max_tokens: 8000
-    use_parser: False
-  CodeLlama-34b-Instruct-hf:
-    name: gpt
-    engine: CodeLlama-34b-Instruct-hf
-    context_length: 8192
-    use_azure: False
-    temperature: 0.
-    top_p: 1
-    retry_delays: 20
-    max_retry_iters: 100
-    stop: 
-    max_tokens: 8000
-    use_parser: False
   deepseek-v3:
     name: gpt
     engine: deepseek-chat
-    context_length: 8192
-    use_azure: False
-    temperature: 0.
-    top_p: 1
-    retry_delays: 20
-    max_retry_iters: 100
-    stop: 
-    max_tokens: 4000
-    use_parser: False
-  Meta-Llama-3.1-70B-Instruct-orig:
-    name: gpt
-    engine: Meta-Llama-3.1-70B-Instruct-orig
-    context_length: 8192
-    use_azure: False
-    temperature: 0.
-    top_p: 1
-    retry_delays: 20
-    max_retry_iters: 100
-    stop: 
-    max_tokens: 4000
-    use_parser: False
-  Meta-Llama-3.1-70B-Instruct-finetune:
-    name: gpt
-    engine: Meta-Llama-3.1-70B-Instruct-finetune
-    context_length: 8192
-    use_azure: False
-    temperature: 0.
-    top_p: 1
-    retry_delays: 20
-    max_retry_iters: 100
-    stop: 
-    max_tokens: 4000
-    use_parser: False
-  Meta-Llama-3.1-8B-Instruct-orig:
-    name: gpt
-    engine: Meta-Llama-3.1-8B-Instruct-orig
-    context_length: 8192
-    use_azure: False
-    temperature: 0.
-    top_p: 1
-    retry_delays: 20
-    max_retry_iters: 100
-    stop: 
-    max_tokens: 4000
-    use_parser: False
-  Meta-Llama-3.1-8B-Instruct-finetune:
-    name: gpt
-    engine: Meta-Llama-3.1-8B-Instruct-finetune
     context_length: 8192
     use_azure: False
     temperature: 0.
@@ -218,28 +110,6 @@ llm:
     retry_delays: 20
     max_retry_iters: 100
     max_tokens: 2000
-    use_parser: False
-  msal-gpt-4:
-    name: msal-gpt
-    engine: gpt-4-0125-preview
-    context_length: 8192
-    use_azure: True
-    temperature: 0.
-    top_p: 1
-    retry_delays: 20
-    max_retry_iters: 15
-    stop: 
-    use_parser: False
-  msal-gpt-3.5:
-    name: msal-gpt
-    engine: gpt-35-turbo-1106
-    context_length: 8192
-    use_azure: True
-    temperature: 0.
-    top_p: 1
-    retry_delays: 20
-    max_retry_iters: 15
-    stop: 
     use_parser: False
   gpt-3.5-turbo-16k:
       name: gpt
@@ -317,35 +187,6 @@ llm:
       max_retry_iters: 100
       max_tokens: 2000
       use_parser: False
-  agentlm-70b:
-      name: vllm
-      engine: none
-      max_tokens: 100
-      temperature: 0
-      top_p: 1
-      stop:
-      context_length: 16384
-      dtype: float32
-      ngpu: 8
-      use_parser: True
-  claude2:
-      name: claude
-      engine: claude-2
-      temperature: 0.
-      top_p: 1
-      retry_delays: 10
-      max_retry_iters: 15
-      stop:
-        - "\n\nHuman:"
-      context_length: 100000
-      xml_split:
-        example: ["\n<example>\n", "</example>\n"]
-        text: ["<text>\n", "</text>\n"]
-        rule: ["<rule>\n", "</rule>\n"]
-        system_msg: ["<system_message>\n", "</system_message>\n"]
-        instruction: ["<instruction>\n", "</instruction>\n"]
-        goal: ["<goal>\n", "</goal>\n"]
-      use_parser: False
   claude-3.5-sonnet:
       name: claude
       engine: claude-3-5-sonnet-20241022
@@ -362,81 +203,22 @@ llm:
         instruction: ["<instruction>\n", "</instruction>\n"]
         goal: ["<goal>\n", "</goal>\n"]
       use_parser: False
-  claude-3-Opus:
-      name: claude
-      engine: claude-3-opus-20240229
+
+  llama2-7b:
+      name: vllm
+      engine: meta-llama/Llama-2-7b-chat-hf
+      max_tokens: 2000
       temperature: 0.
       top_p: 1
-      retry_delays: 10
-      max_retry_iters: 15
-      context_length: 100000
-      xml_split:
-        example: ["\n<example>\n", "</example>\n"]
-        text: ["<text>\n", "</text>\n"]
-        rule: ["<rule>\n", "</rule>\n"]
-        system_msg: ["<system_message>\n", "</system_message>\n"]
-        instruction: ["<instruction>\n", "</instruction>\n"]
-        goal: ["<goal>\n", "</goal>\n"]
-      use_parser: False
-  deepseek-67b:   # for opensource models, llm name should be either vllm/hg based on the vllm/huggingface inference architecture
-      name: vllm
-      engine: deepseek-ai/deepseek-llm-67b-chat
-      max_tokens: 100
-      temperature: 0
-      top_p: 1
-      stop:
+      stop: 
       context_length: 4096
       dtype: float16
-      ngpu: 4
-      use_parser: True
-  codellama-13b:
-      name: vllm
-      engine: codellama/CodeLlama-13b-Instruct-hf
-      max_tokens: 100
-      temperature: 0
-      top_p: 1
-      stop:
-      context_length: 16384
-      dtype: float32
-      ngpu: 4
-      use_parser: True  
-  codellama-34b:
-      name: vllm
-      engine: TODO
-      max_tokens: 100
-      temperature: 0
-      top_p: 1
-      stop:
-      context_length: 16384
-      dtype: float32
-      ngpu: 8
-      use_parser: True
-  codellama-70b:
-    name: vllm
-    engine: TODO
-    max_tokens: 100
-    temperature: 0
-    top_p: 1
-    stop: "\n"
-    context_length: 16384
-    dtype: float32
-    ngpu: 4
-    use_parser: True
-  lemur-70b:
-      name: vllm
-      engine: OpenLemur/lemur-70b-chat-v1
-      max_tokens: 100
-      temperature: 0.
-      top_p: 1
-      stop:
-      context_length: 4096
-      ngpu: 4
-      dtype: float16
+      ngpu: 1
       use_parser: True
   llama2-13b:
       name: vllm
-      engine: /model_download/Llama-2-13b-chat-hf
-      max_tokens: 100
+      engine: meta-llama/Llama-2-13b-chat-hf
+      max_tokens: 2000
       temperature: 0.
       top_p: 1
       stop:
@@ -447,7 +229,7 @@ llm:
   llama2-70b:
       name: vllm
       engine:  meta-llama/Llama-2-70b-chat-hf
-      max_tokens: 100
+      max_tokens: 2000
       temperature: 0.
       top_p: 1
       stop:
@@ -455,56 +237,70 @@ llm:
       dtype: float16
       ngpu: 4
       use_parser: True
-
-  vicuna-13b-16k:
-      name: vllm
-      engine: lmsys/vicuna-13b-v1.5-16k
-      max_tokens: 100
-      temperature: 0.
-      top_p: 1
-      stop:
-      context_length: 16384
-      dtype: float16
-      ngpu: 2
-      use_parser: True
-  mistral-7b:
-      name: vllm
-      engine: TODO
-      max_tokens: 100
-      temperature: 0.
-      top_p: 1
-      stop:
-      context_length: 32768
-      dtype: float16
-      ngpu: 1
-      use_parser: True
-  llama2-7b:
-      name: vllm
-      engine: meta-llama/Llama-2-7b-chat-hf
-      max_tokens: 100
-      temperature: 0.
-      top_p: 1
-      stop: 
-      context_length: 4096
-      dtype: float16
-      ngpu: 1
-      use_parser: True
-  agentlm-7b:
-      name: vllm
-      engine: TODO
-      max_tokens: 100
-      temperature: 0.
-      top_p: 1
-      stop:
-      context_length: 4096
-      dtype: float16
-      ngpu: 1
-      use_parser: True
    
+  llama3.1-70b:
+    name: vllm
+    engine: meta-llama/Llama-3.1-70B-Instruct
+    context_length: 8192
+    use_azure: False
+    temperature: 0.
+    top_p: 1
+    retry_delays: 20
+    max_retry_iters: 100
+    stop: 
+    max_tokens: 4000
+    use_parser: False
+  llama3.1-8b:
+    name: vllm
+    engine: meta-llama/Llama-3.1-8B-Instruct
+    context_length: 8192
+    use_azure: False
+    temperature: 0.
+    top_p: 1
+    retry_delays: 20
+    max_retry_iters: 100
+    stop: 
+    max_tokens: 4000
+    use_parser: False
+
+
   codellama-7b:
     name: vllm
-    engine: TODO
-    max_tokens: 100
+    engine: codellama/CodeLlama-7b-Instruct-hf
+    max_tokens: 2000
+    temperature: 0
+    top_p: 1
+    stop: "\n"
+    context_length: 16384
+    dtype: float32
+    ngpu: 4
+    use_parser: True
+  codellama-13b:
+    name: vllm
+    engine: codellama/CodeLlama-13b-Instruct-hf
+    max_tokens: 2000
+    temperature: 0
+    top_p: 1
+    stop:
+    context_length: 16384
+    dtype: float32
+    ngpu: 4
+    use_parser: True  
+  codellama-34b:
+    name: vllm
+    engine: codellama/CodeLlama-34b-Instruct-hf
+    max_tokens: 2000
+    temperature: 0
+    top_p: 1
+    stop:
+    context_length: 16384
+    dtype: float32
+    ngpu: 8
+    use_parser: True
+  codellama-70b:
+    name: vllm
+    engine: codellama/CodeLlama-70b-Instruct-hf
+    max_tokens: 2000
     temperature: 0
     top_p: 1
     stop: "\n"
@@ -513,39 +309,4 @@ llm:
     ngpu: 4
     use_parser: True
 
-  agentlm-7b:
-      name: vllm
-      engine: TODO
-      max_tokens: 100
-      temperature: 0.
-      top_p: 1
-      stop:
-      context_length: 4096
-      dtype: float16
-      ngpu: 1
-      use_parser: True
-   
-  codellama-7b:
-    name: vllm
-    engine: TODO
-    max_tokens: 100
-    temperature: 0
-    top_p: 1
-    stop:
-    context_length: 16384
-    dtype: float32
-    ngpu: 4
-    use_parser: True
-    
-  codellama-7b-plan-instruct:
-    name: vllm
-    engine: TODO
-    max_tokens: 100
-    temperature: 0
-    top_p: 1
-    stop:
-    context_length: 16384
-    dtype: float32
-    ngpu: 4
-    use_parser: True
 env: none
