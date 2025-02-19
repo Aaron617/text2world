@@ -125,6 +125,7 @@ bash evaluate.sh $PROJECT_NAME
 # 📝 Citation
 
 If you find this work useful, please consider citing the following papers:
+
 Text2World: Benchmarking Large Language Models for Symbolic World Model Generation:
 ```
 @misc{hu2025text2worldbenchmarkinglargelanguage,
