@@ -25,7 +25,7 @@
 
 
 # 📚 Overview
-![](./assets/main.svg)
+![](./assets/main.png)
 
 # 📝 Updates
 
