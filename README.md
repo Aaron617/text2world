@@ -18,9 +18,16 @@
   <a href="https://hits.seeyoufarm.com">
     <img alt="vies" src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FAaron617%2Ftext2world&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false">
   </a>
-  <!-- <a href="https://arxiv.org/abs/YOUR_PAPER_ID">
-    <img alt="arXiv" src="https://img.shields.io/badge/arXiv-YOUR_PAPER_ID-b31b1b.svg">
-  </a> -->
+  <a href="https://arxiv.org/abs/2502.13092">
+    <img alt="arXiv" src="https://img.shields.io/badge/arXiv-2502.13092-b31b1b.svg">
+  </a>
+  <a href="https://huggingface.co/datasets/xdzouyd/text2world">
+    <img alt="Dataset" src="https://img.shields.io/badge/🤗-Dataset-ffce44">
+  </a>
+  <!-- <a href="https://huggingface.co/spaces/xdzouyd/text2world">
+    <img alt="Demo" src="https://img.shields.io/badge/🤗-Data_Viewer-ffce44">
+  </a>
+   -->
 </p>
 
 
@@ -29,7 +36,7 @@
 
 # 📝 Updates
 
-- 2025-02-18: Add [data viewer](https://huggingface.co/spaces/xdzouyd/text2world) for better visualization of Text2World.
+- 2025-02-18: Add [data viewer](https://huggingface.co/spaces/xdzouyd/text2world) and [dataset](https://huggingface.co/datasets/xdzouyd/text2world) for better visualization of Text2World.
 
 # 💻 Installation
 ```
