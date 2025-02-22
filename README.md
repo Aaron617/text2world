@@ -1,7 +1,6 @@
 <h1 align="center">
 	🌍 Text2World: Benchmarking Large Language Models for Symbolic World Model Generation<br>
 </h1>
-<h2 align="center">Webpage: <a href="https://text-to-world.github.io/">text-to-world.github.io/</a></h2>
 <p align="center">
   <!-- <a href="LICENSE">
     <img alt="License" src="https://img.shields.io/github/license/Aaron617/text2world?color=blue">
@@ -28,6 +27,7 @@
     <img alt="Demo" src="https://img.shields.io/badge/🤗-Data_Viewer-ffce44">
   </a>
    -->
+   Webpage: <a href="https://text-to-world.github.io/">text-to-world.github.io</a>
 </p>
 
 
