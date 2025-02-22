@@ -1,7 +1,7 @@
 <h1 align="center">
-	🌍 Text2World: Benchmarking Large Language Models for Symbolic World Model Generation<br>Webpage: <a href="https://text-to-world.github.io/" target="_blank">https://text-to-world.github.io/</a>
+	🌍 Text2World: Benchmarking Large Language Models for Symbolic World Model Generation<br>
 </h1>
-
+<h2 align="center">Webpage: <a href="https://text-to-world.github.io/">text-to-world.github.io/</a></h2>
 <p align="center">
   <!-- <a href="LICENSE">
     <img alt="License" src="https://img.shields.io/github/license/Aaron617/text2world?color=blue">
