@@ -1,5 +1,5 @@
 <h1 align="center">
-	🌍 Text2World: Benchmarking Large Language Models for Symbolic World Model Generation<br>
+	🌍 Text2World: Benchmarking Large Language Models for Symbolic World Model Generation<br>Webpage: <a href="https://text-to-world.github.io/" target="_blank">https://text-to-world.github.io/</a>
 </h1>
 
 <p align="center">
