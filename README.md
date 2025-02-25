@@ -137,7 +137,7 @@ Text2World: Benchmarking Large Language Models for Symbolic World Model Generati
 ```
 @misc{hu2025text2worldbenchmarkinglargelanguage,
       title={Text2World: Benchmarking Large Language Models for Symbolic World Model Generation}, 
-      author={Mengkang Hu and Tianxing Chen and Yude Zou and Yuheng Lei and Qiguang Chen and Ming Li and Hongyuan Zhang and Wenqi Shao and Ping Luo},
+      author={Mengkang Hu and Tianxing Chen and Yude Zou and Yuheng Lei and Qiguang Chen and Ming Li and Yao Mu and Hongyuan Zhang and Wenqi Shao and Ping Luo},
       year={2025},
       eprint={2502.13092},
       archivePrefix={arXiv},
